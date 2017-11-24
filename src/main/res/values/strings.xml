@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Othila</string>
+    <string name="titulo">Titulo:</string>
+    <string name="salvar">Salvar</string>
+    <string name="paginas">Numero de paginas:</string>
+
 </resources>
