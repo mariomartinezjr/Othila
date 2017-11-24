@@ -3,5 +3,6 @@
     <string name="titulo">Titulo:</string>
     <string name="salvar">Salvar</string>
     <string name="paginas">Numero de paginas:</string>
+    <string name="voltar">Voltar</string>
 
 </resources>

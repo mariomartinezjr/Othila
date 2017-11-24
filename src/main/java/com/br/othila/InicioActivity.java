@@ -34,6 +34,25 @@ public class InicioActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Intent intent = getIntent();
+        livroAtual = (Livro) intent.getSerializableExtra("livroAtual");
+
+        if(livroAtual != null){
+            nomeEdit.setText(livroAtual.getTitulo());
+            paginasEdit.setText(livroAtual.getPaginas());
+
+
+
+        }else {
+            nomeEdit.setText("");
+            paginasEdit.setText("");
+        }
+    }
+
     //Criando o metodo de click do botão salvar
 
     @OnClick(R.id.btn_cadastro_salvar)
@@ -54,10 +73,11 @@ public class InicioActivity extends AppCompatActivity {
 
         if(titulo != null && !titulo.isEmpty()){
             livroAtual.setTitulo(titulo);
-            livroAtual.setPaginas(Integer.getInteger(paginas) );
-            livroAtual.setImagem(R.drawable.img1);
+            livroAtual.setPaginas(paginas) ;
 
-// instent para ir para lista
+            livroAtual.setImagem(R.drawable.user1_image);
+
+// intent para ir para lista
 
             Intent irParaLista = new Intent(InicioActivity.this, LivroList.class);
             irParaLista.putExtra("livro", livroAtual);

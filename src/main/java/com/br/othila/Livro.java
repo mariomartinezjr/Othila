@@ -13,7 +13,7 @@ public class Livro implements Serializable {
 
     private Long id;
     private String titulo;
-    private int paginas;
+    private String paginas;
     private int imagem;
 
 
@@ -36,11 +36,11 @@ public class Livro implements Serializable {
         this.titulo = titulo;
     }
 
-    public int getPaginas() {
+    public String getPaginas() {
         return paginas;
     }
 
-    public void setPaginas(int paginas) {
+    public void setPaginas(String paginas) {
         this.paginas = paginas;
     }
 
@@ -59,9 +59,9 @@ public class Livro implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Livro usuario = (Livro) o;
+        Livro livro = (Livro) o;
 
-        return id != null ? id.equals(usuario.id) : usuario.id == null;
+        return id != null ? id.equals(livro.id) : livro.id == null;
     }
 
     @Override
