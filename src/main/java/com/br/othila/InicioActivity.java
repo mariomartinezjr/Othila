@@ -1,10 +1,14 @@
 package com.br.othila;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,6 +23,12 @@ public class InicioActivity extends AppCompatActivity {
 
     @BindView(R.id.ed_cadastro_paginas)
     EditText paginasEdit;
+
+    @BindView(R.id.edHora)
+            EditText hora;
+
+    @BindView(R.id.edminuto)
+            EditText minuto;
 
 // variavel para controlar adição ou edição
 
@@ -53,15 +63,35 @@ public class InicioActivity extends AppCompatActivity {
         }
     }
 
+    public void lembrete(String h , String m){
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(h));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(m));
+
+
+        Intent intent = new Intent(getApplicationContext(), Notification_reciever.class);
+        PendingIntent pendingIntent =  PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
+
+    }
+
     //Criando o metodo de click do botão salvar
 
     @OnClick(R.id.btn_cadastro_salvar)
     public void salvar(){
         //Retira o titulo/paginas digitado no Edit Text
 
+
+
         String titulo = nomeEdit.getText().toString();
         String paginas = paginasEdit.getText().toString();
 
+        String h = hora.getText().toString();
+        String m = minuto.getText().toString();
 
         // faz a verificação para nova adição ou edição e instancia livroAtual
 
@@ -75,7 +105,7 @@ public class InicioActivity extends AppCompatActivity {
             livroAtual.setTitulo(titulo);
             livroAtual.setPaginas(paginas) ;
 
-            livroAtual.setImagem(R.drawable.user1_image);
+            livroAtual.setImagem(R.mipmap.ic_launcher);
 
 // intent para ir para lista
 
@@ -85,6 +115,11 @@ public class InicioActivity extends AppCompatActivity {
             //volta livroAtual para null para proxima iteração
 
             livroAtual = null;
+
+            if(h != null && m != null){
+
+                lembrete(h,m);
+            }
 
             startActivity(irParaLista);
 

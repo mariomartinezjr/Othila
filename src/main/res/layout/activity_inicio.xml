@@ -24,7 +24,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ed_cadastro_paginas"
-        android:inputType="text"/>
+        android:inputType="number"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ajuste"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hora"
+
+        />
+
+    <EditText
+        android:id="@+id/edHora"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:inputType="number"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/minuto"
+
+        />
+
+    <EditText
+        android:id="@+id/edminuto"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:inputType="number"
+
+        />
 
     <Button
         android:layout_width="wrap_content"
