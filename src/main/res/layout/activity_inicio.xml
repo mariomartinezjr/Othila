@@ -44,7 +44,7 @@
     <EditText
         android:id="@+id/edHora"
         android:layout_width="30dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:inputType="number"
 
         />
@@ -59,16 +59,59 @@
     <EditText
         android:id="@+id/edminuto"
         android:layout_width="30dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dia"
+        />
+
+    <EditText
+        android:id="@+id/eddia"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mes"
+        />
+
+    <EditText
+        android:id="@+id/edmes"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ano"
+        />
+
+    <EditText
+        android:id="@+id/edano"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
         android:inputType="number"
 
         />
 
     <Button
+        android:id="@+id/btn_cadastro_salvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_cadastro_salvar"
         android:text="@string/salvar"
+        android:layout_marginLeft="150dp"
         />
 
 

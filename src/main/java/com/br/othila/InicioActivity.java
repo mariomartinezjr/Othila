@@ -30,6 +30,15 @@ public class InicioActivity extends AppCompatActivity {
     @BindView(R.id.edminuto)
             EditText minuto;
 
+    @BindView(R.id.edano)
+            EditText ano;
+
+    @BindView(R.id.edmes)
+            EditText mes;
+
+    @BindView(R.id.eddia)
+            EditText dia;
+
 // variavel para controlar adição ou edição
 
     Livro livroAtual = null;
@@ -63,16 +72,21 @@ public class InicioActivity extends AppCompatActivity {
         }
     }
 
-    public void lembrete(String h , String m){
+    public void lembrete(String h , String m,String d,String me, String a, String mensagem){
 
         Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.YEAR, Integer.parseInt(a), Calendar.MONTH, Integer.parseInt(me) ,Calendar.DAY_OF_MONTH, Integer.parseInt(d));
 
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(h));
         calendar.set(Calendar.MINUTE, Integer.parseInt(m));
 
 
         Intent intent = new Intent(getApplicationContext(), Notification_reciever.class);
+        intent.putExtra("mensagem", mensagem);
         PendingIntent pendingIntent =  PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
@@ -90,8 +104,11 @@ public class InicioActivity extends AppCompatActivity {
         String titulo = nomeEdit.getText().toString();
         String paginas = paginasEdit.getText().toString();
 
-        String h = hora.getText().toString();
-        String m = minuto.getText().toString();
+        String hr = hora.getText().toString();
+        String mi = minuto.getText().toString();
+        String di = dia.getText().toString();
+        String mm = mes.getText().toString();
+        String an = ano.getText().toString();
 
         // faz a verificação para nova adição ou edição e instancia livroAtual
 
@@ -116,9 +133,9 @@ public class InicioActivity extends AppCompatActivity {
 
             livroAtual = null;
 
-            if(h != null && m != null){
+            if(hr != null && mi != null){
 
-                lembrete(h,m);
+                lembrete(hr,mi,di,mm,an, titulo);
             }
 
             startActivity(irParaLista);

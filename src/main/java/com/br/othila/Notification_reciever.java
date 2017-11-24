@@ -21,6 +21,13 @@ public class Notification_reciever  extends BroadcastReceiver{
 
         Intent repeating_intent = new Intent(context , Repeating_activity.class);
 
+
+         String mensagem = intent.getStringExtra("mensagem");
+
+         if (mensagem == null){
+             mensagem = " ainda não deu certo";
+         }
+
         repeating_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context,100, repeating_intent,PendingIntent.FLAG_UPDATE_CURRENT);
@@ -28,7 +35,7 @@ public class Notification_reciever  extends BroadcastReceiver{
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Notificação de leitura")
-                .setContentText("hora de ler o livro")
+                .setContentText("hora de ler o livro " + mensagem)
                 .setAutoCancel(true);
 
         notificationManager.notify(100,builder.build());

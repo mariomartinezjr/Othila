@@ -46,7 +46,7 @@ public class Adaptador extends ArrayAdapter<Livro> {
         if(livro != null){
             viewHolder.titulo.setText(livro.getTitulo());
             viewHolder.paginas.setText(livro.getPaginas());
-            viewHolder.imagem.setImageResource(livro.getImagem());
+            //viewHolder.imagem.setImageResource(livro.getImagem());
         }
 
         return convertView;
