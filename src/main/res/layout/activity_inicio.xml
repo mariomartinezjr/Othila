@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <TextView
+        android:id="@+id/ltitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/titulo"/>
@@ -13,31 +14,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ed_cadastro_titulo"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:layout_below="@id/ltitulo"
+        />
 
     <TextView
+        android:id="@+id/lnumeropg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/paginas"/>
+        android:text="@string/paginas"
+        android:layout_below="@id/ed_cadastro_titulo"
+        />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ed_cadastro_paginas"
         android:inputType="number"
+        android:layout_below="@id/lnumeropg"
 
         />
 
     <TextView
+        android:id="@+id/llembrete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ajuste"
+        android:layout_below="@id/ed_cadastro_paginas"
+
         />
 
     <TextView
+        android:id="@+id/lhora"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hora"
+        android:layout_below="@id/ldia"
+        android:layout_marginTop="30dp"
 
         />
 
@@ -46,13 +59,20 @@
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:layout_below="@id/ldia"
+        android:layout_toRightOf="@id/lhora"
+        android:layout_marginTop="20dp"
 
         />
 
     <TextView
+        android:id="@+id/lmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/minuto"
+        android:layout_below="@id/ldia"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@id/edHora"
 
         />
 
@@ -60,14 +80,23 @@
         android:id="@+id/edminuto"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
 
-        />
+        android:layout_alignBaseline="@+id/edHora"
+        android:layout_alignBottom="@+id/edHora"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_toEndOf="@+id/edmes"
+        android:layout_toRightOf="@+id/edmes"
+        android:inputType="number" />
 
     <TextView
+        android:id="@+id/ldia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dia"
+        android:layout_below="@id/llembrete"
+        android:layout_marginTop="10dp"
+
         />
 
     <EditText
@@ -75,13 +104,20 @@
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:layout_toRightOf="@id/ldia"
+        android:layout_below="@id/llembrete"
 
         />
 
     <TextView
+        android:id="@+id/lmes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mes"
+        android:layout_toRightOf="@id/eddia"
+        android:layout_below="@id/llembrete"
+        android:layout_marginTop="10dp"
+
         />
 
     <EditText
@@ -89,13 +125,19 @@
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:layout_below="@id/llembrete"
+        android:layout_toRightOf="@id/lmes"
 
         />
 
     <TextView
+        android:id="@+id/lano"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ano"
+        android:layout_below="@id/llembrete"
+        android:layout_toRightOf="@id/edmes"
+        android:layout_marginTop="10dp"
         />
 
     <EditText
@@ -103,8 +145,30 @@
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:layout_below="@id/llembrete"
+        android:layout_toRightOf="@id/lano"
 
         />
+
+    <ImageView
+        android:id="@+id/user_image"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:layout_centerHorizontal="true"
+        android:src="@android:drawable/ic_menu_camera"
+        android:layout_below="@id/lhora"
+        android:layout_marginTop="50dp"
+        />
+
+    <TextView
+        android:id="@+id/change_image_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_image"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/secondary_text_light"
+        android:textSize="18sp"
+        android:text="Alterar imagem"/>
 
     <Button
         android:id="@+id/btn_cadastro_salvar"
@@ -112,7 +176,9 @@
         android:layout_height="wrap_content"
         android:text="@string/salvar"
         android:layout_marginLeft="150dp"
+        android:layout_below="@id/lhora"
+        android:layout_marginTop="200dp"
         />
 
 
-</LinearLayout>
+</RelativeLayout>

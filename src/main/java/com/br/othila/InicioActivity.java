@@ -3,9 +3,12 @@ package com.br.othila;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -39,6 +42,11 @@ public class InicioActivity extends AppCompatActivity {
     @BindView(R.id.eddia)
             EditText dia;
 
+    @BindView(R.id.user_image)
+    ImageView imagem;
+
+    private static final int CAMERA_REQUEST = 123;
+
 // variavel para controlar adição ou edição
 
     Livro livroAtual = null;
@@ -51,6 +59,25 @@ public class InicioActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
+    }
+
+    @OnClick(R.id.user_image)
+    public void changeImage(){
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == CAMERA_REQUEST && resultCode == RESULT_OK){
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            imagem.setImageBitmap(photo);
+
+        } else {
+            Toast.makeText(InicioActivity.this, "Imagem não carregada!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -121,8 +148,9 @@ public class InicioActivity extends AppCompatActivity {
         if(titulo != null && !titulo.isEmpty()){
             livroAtual.setTitulo(titulo);
             livroAtual.setPaginas(paginas) ;
+            livroAtual.setImagem(0);
 
-            livroAtual.setImagem(R.mipmap.ic_launcher);
+
 
 // intent para ir para lista
 
