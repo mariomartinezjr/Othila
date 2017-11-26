@@ -4,19 +4,42 @@
     android:layout_height="match_parent">
 
 
+    <ImageView
+        android:id="@+id/user_image"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:layout_centerHorizontal="true"
+        android:src="@android:drawable/ic_menu_camera"
+        android:layout_marginTop="50dp"
+        />
+
+    <TextView
+        android:id="@+id/change_image_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_image"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/secondary_text_light"
+        android:textSize="18sp"
+        android:text="Alterar imagem"/>
+
+
     <TextView
         android:id="@+id/ltitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/titulo"/>
+        android:text="@string/titulo"
+        android:layout_below="@id/change_image_label"
+        />
 
     <EditText
+        android:id="@+id/ed_cadastro_titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ed_cadastro_titulo"
-        android:inputType="text"
-        android:layout_below="@id/ltitulo"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ltitulo"
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/lnumeropg"
@@ -41,6 +64,7 @@
         android:layout_height="wrap_content"
         android:text="@string/ajuste"
         android:layout_below="@id/ed_cadastro_paginas"
+        android:layout_marginTop="10dp"
 
         />
 
@@ -56,12 +80,14 @@
 
     <EditText
         android:id="@+id/edHora"
-        android:layout_width="30dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:layout_below="@id/ldia"
         android:layout_toRightOf="@id/lhora"
         android:layout_marginTop="20dp"
+        android:maxLength="2"
+        android:text="0"
 
         />
 
@@ -78,16 +104,17 @@
 
     <EditText
         android:id="@+id/edminuto"
-        android:layout_width="30dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
 
-        android:layout_alignBaseline="@+id/edHora"
-        android:layout_alignBottom="@+id/edHora"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
-        android:layout_toEndOf="@+id/edmes"
-        android:layout_toRightOf="@+id/edmes"
-        android:inputType="number" />
+        android:layout_alignBaseline="@+id/lmin"
+        android:layout_alignBottom="@+id/lmin"
+        android:layout_alignLeft="@+id/user_image"
+        android:layout_alignStart="@+id/user_image"
+        android:inputType="number"
+        android:maxLength="2"
+        android:text="0"
+        />
 
     <TextView
         android:id="@+id/ldia"
@@ -101,11 +128,13 @@
 
     <EditText
         android:id="@+id/eddia"
-        android:layout_width="30dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:layout_toRightOf="@id/ldia"
         android:layout_below="@id/llembrete"
+        android:maxLength="2"
+        android:text="0"
 
         />
 
@@ -122,11 +151,13 @@
 
     <EditText
         android:id="@+id/edmes"
-        android:layout_width="30dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:layout_below="@id/llembrete"
         android:layout_toRightOf="@id/lmes"
+        android:maxLength="2"
+        android:text="0"
 
         />
 
@@ -142,33 +173,17 @@
 
     <EditText
         android:id="@+id/edano"
-        android:layout_width="30dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:layout_below="@id/llembrete"
         android:layout_toRightOf="@id/lano"
+        android:maxLength="4"
+        android:text="0"
 
         />
 
-    <ImageView
-        android:id="@+id/user_image"
-        android:layout_width="86dp"
-        android:layout_height="86dp"
-        android:layout_centerHorizontal="true"
-        android:src="@android:drawable/ic_menu_camera"
-        android:layout_below="@id/lhora"
-        android:layout_marginTop="50dp"
-        />
 
-    <TextView
-        android:id="@+id/change_image_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/user_image"
-        android:layout_centerHorizontal="true"
-        android:textColor="@android:color/secondary_text_light"
-        android:textSize="18sp"
-        android:text="Alterar imagem"/>
 
     <Button
         android:id="@+id/btn_cadastro_salvar"
@@ -177,7 +192,7 @@
         android:text="@string/salvar"
         android:layout_marginLeft="150dp"
         android:layout_below="@id/lhora"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="50dp"
         />
 
 
