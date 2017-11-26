@@ -44,15 +44,15 @@ public class LivroList extends AppCompatActivity {
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Livro livro = (Livro) parent.getItemAtPosition(position);
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Livro livro = (Livro) parent.getItemAtPosition(position);
 
-                    Intent voltarParaCadastro = new Intent(LivroList.this, InicioActivity.class);
-                    voltarParaCadastro.putExtra("livroAtual", livro);
-                    startActivity(voltarParaCadastro);
-                }
-            });
+                Intent voltarParaCadastro = new Intent(LivroList.this, InicioActivity.class);
+                voltarParaCadastro.putExtra("livroAtual", livro);
+                startActivity(voltarParaCadastro);
+            }
+        });
 
         //Função de click longo para excluir item da lista
 
@@ -82,6 +82,6 @@ public class LivroList extends AppCompatActivity {
     @OnClick(R.id.btn_lista_fechar)
     public void fechar(){
         finish();
-   }
+    }
 
 }

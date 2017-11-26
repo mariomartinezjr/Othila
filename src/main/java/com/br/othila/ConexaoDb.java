@@ -27,7 +27,7 @@ public class ConexaoDb extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
 
-        String sql = "CREATE TABLE tb_livro  (id integer PRIMARY KEY, titulo text,  paginas text,imagem integer)";
+        String sql = "CREATE TABLE tb_livro  (id integer PRIMARY KEY, titulo text,  paginas text,imagem blob)";
         db.execSQL(sql);
     }
 
@@ -57,7 +57,7 @@ public class ConexaoDb extends SQLiteOpenHelper {
                 livro.setId(cursor.getLong(0));
                 livro.setTitulo(cursor.getString(1));
                 livro.setPaginas(cursor.getString(2));
-                livro.setImagem(cursor.getInt(3));
+                livro.setImagem(cursor.getBlob(3));
 
                 livroList.add(livro);
 

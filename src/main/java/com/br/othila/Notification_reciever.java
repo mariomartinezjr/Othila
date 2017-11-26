@@ -22,11 +22,8 @@ public class Notification_reciever  extends BroadcastReceiver{
         Intent repeating_intent = new Intent(context , Repeating_activity.class);
 
 
-         String mensagem = intent.getStringExtra("mensagem");
+        String mensagem = intent.getStringExtra("mensagem");
 
-         if (mensagem == null){
-             mensagem = " ainda não deu certo";
-         }
 
         repeating_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -39,6 +36,8 @@ public class Notification_reciever  extends BroadcastReceiver{
                 .setAutoCancel(true);
 
         notificationManager.notify(100,builder.build());
+
+
 
 
 

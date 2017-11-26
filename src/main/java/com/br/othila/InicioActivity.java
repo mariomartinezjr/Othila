@@ -4,6 +4,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
 
 import butterknife.BindView;
@@ -28,19 +32,19 @@ public class InicioActivity extends AppCompatActivity {
     EditText paginasEdit;
 
     @BindView(R.id.edHora)
-            EditText hora;
+    EditText hora;
 
     @BindView(R.id.edminuto)
-            EditText minuto;
+    EditText minuto;
 
     @BindView(R.id.edano)
-            EditText ano;
+    EditText ano;
 
     @BindView(R.id.edmes)
-            EditText mes;
+    EditText mes;
 
     @BindView(R.id.eddia)
-            EditText dia;
+    EditText dia;
 
     @BindView(R.id.user_image)
     ImageView imagem;
@@ -91,6 +95,10 @@ public class InicioActivity extends AppCompatActivity {
             nomeEdit.setText(livroAtual.getTitulo());
             paginasEdit.setText(livroAtual.getPaginas());
 
+            byte[] outimage = livroAtual.getImagem();
+            ByteArrayInputStream imagestream = new ByteArrayInputStream(outimage);
+            Bitmap imageBitmap = BitmapFactory.decodeStream(imagestream);
+            imagem.setImageBitmap(imageBitmap);
 
 
         }else {
@@ -99,14 +107,21 @@ public class InicioActivity extends AppCompatActivity {
         }
     }
 
-    public void lembrete(String h , String m,String d,String me, String a, String mensagem){
+    public void lembrete  (int h , int m,int d,int mm, int a, String mensagem){
 
         Calendar calendar = Calendar.getInstance();
 
-        calendar.set(Calendar.YEAR, Integer.parseInt(a), Calendar.MONTH, Integer.parseInt(me) ,Calendar.DAY_OF_MONTH, Integer.parseInt(d));
+        if(h != 0  && m !=0){
 
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(h));
-        calendar.set(Calendar.MINUTE, Integer.parseInt(m));
+
+
+       //calendar.set(Calendar.YEAR, a, Calendar.MONTH, me ,Calendar.DAY_OF_MONTH, d);
+
+            calendar.set(Calendar.MONTH, mm -1);
+            calendar.set(Calendar.YEAR, a);
+            calendar.set(Calendar.DAY_OF_MONTH, d);
+            calendar.set(Calendar.HOUR_OF_DAY , h);
+            calendar.set(Calendar.MINUTE , m);
 
 
         Intent intent = new Intent(getApplicationContext(), Notification_reciever.class);
@@ -118,6 +133,9 @@ public class InicioActivity extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
 
+       }else {
+            h=0;
+        }
     }
 
     //Criando o metodo de click do botão salvar
@@ -131,11 +149,11 @@ public class InicioActivity extends AppCompatActivity {
         String titulo = nomeEdit.getText().toString();
         String paginas = paginasEdit.getText().toString();
 
-        String hr = hora.getText().toString();
-        String mi = minuto.getText().toString();
-        String di = dia.getText().toString();
-        String mm = mes.getText().toString();
-        String an = ano.getText().toString();
+        int hr = Integer.parseInt(hora.getText().toString());
+        int mi = Integer.parseInt(minuto.getText().toString());
+        int di = Integer.parseInt(dia.getText().toString());
+        int mm = Integer.parseInt(mes.getText().toString());
+        int an = Integer.parseInt(ano.getText().toString());
 
         // faz a verificação para nova adição ou edição e instancia livroAtual
 
@@ -146,13 +164,20 @@ public class InicioActivity extends AppCompatActivity {
         //seta atributos de livroAtual
 
         if(titulo != null && !titulo.isEmpty()){
+
+
+            lembrete (hr,mi,di,mm,an, titulo);
+
             livroAtual.setTitulo(titulo);
             livroAtual.setPaginas(paginas) ;
-            livroAtual.setImagem(0);
+
+            Bitmap bitmap = ((BitmapDrawable) imagem.getDrawable()).getBitmap();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
+            livroAtual.setImagem(stream.toByteArray());
 
 
-
-// intent para ir para lista
+        // intent para ir para lista
 
             Intent irParaLista = new Intent(InicioActivity.this, LivroList.class);
             irParaLista.putExtra("livro", livroAtual);
@@ -161,14 +186,10 @@ public class InicioActivity extends AppCompatActivity {
 
             livroAtual = null;
 
-            if(hr != null && mi != null){
-
-                lembrete(hr,mi,di,mm,an, titulo);
-            }
 
             startActivity(irParaLista);
 
-        //caso o usuario não informe o titulo do livre sera mostrada uma mensagem
+            //caso o usuario não informe o titulo do livre sera mostrada uma mensagem
         } else {
             Toast.makeText(InicioActivity.this, "Informe o Titulo do livro !", Toast.LENGTH_SHORT).show();
         }

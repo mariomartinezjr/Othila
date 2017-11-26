@@ -14,7 +14,7 @@ public class Livro implements Serializable {
     private Long id;
     private String titulo;
     private String paginas;
-    private int imagem;
+    private byte[] imagem;
 
 
 
@@ -44,11 +44,11 @@ public class Livro implements Serializable {
         this.paginas = paginas;
     }
 
-    public int getImagem() {
+    public byte[] getImagem() {
         return imagem;
     }
 
-    public void setImagem(int imagem) {
+    public void setImagem(byte[] imagem) {
         this.imagem = imagem;
     }
 
